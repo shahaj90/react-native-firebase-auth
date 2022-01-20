@@ -1,6 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from './src/firebase/config';
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens'
 import { decode, encode } from 'base-64'
@@ -12,6 +14,20 @@ const Stack = createStackNavigator();
 export default function App() {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    onAuthState();
+  }, []);
+
+  const onAuthState = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    })
+  }
 
   return (
     <NavigationContainer>

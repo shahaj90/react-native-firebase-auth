@@ -15,5 +15,12 @@ export default StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         paddingLeft: 16
+    },
+    baseText: {
+        fontFamily: "Cochin"
+    },
+    titleText: {
+        fontSize: 20,
+        fontWeight: "bold"
     }
 })
